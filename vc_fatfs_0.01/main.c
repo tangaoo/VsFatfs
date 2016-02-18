@@ -4,6 +4,9 @@
 #include "diskio.h"
 #include "ff.h"
 
+BYTE fbuff[512 * 2];   // file r/w buffers (not required for Tiny-FatFs)
+BYTE buffer[4096];   // file copy buffer
+
 void die(char *name, int res)
 {
 	printf("%s: %d\n", name, res);
@@ -14,8 +17,7 @@ void main(void)
 {
     FATFS fs;            // FatFs work area
     FIL fsrc, fdst;      // file structures
-    BYTE fbuff[512*2];   // file r/w buffers (not required for Tiny-FatFs)
-    BYTE buffer[4096];   // file copy buffer
+
     FRESULT res;         // FatFs function common result code
     WORD br, bw;         // File R/W count
 
@@ -52,4 +54,6 @@ void main(void)
 
     // Deactivate FatFs module
     FatFs = NULL;
+
+	system("pause");
 }
